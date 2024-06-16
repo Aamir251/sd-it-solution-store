@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import { Cairo, Poppins } from 'next/font/google'
+
+const cairo = Cairo({
+  variable: '--font-family-cairo',
+  subsets: ['latin'],
+  weight: ['500', '700', '300', '400', '600'],
+})
+
+const poppins = Poppins({
+  variable : '--font-family-poppins',
+  subsets: ['latin'],
+  weight: ['500', '700', '300', '400', '600'],
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,9 +25,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${cairo.variable} ${poppins.variable}`}>{children}</body>
     </html>
   );
 }

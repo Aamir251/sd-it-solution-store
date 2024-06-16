@@ -1,0 +1,49 @@
+
+type ButtonType = "a" | "button"
+
+type BaseProps = PropsWithChildren<{
+  as : ButtonType
+}>
+
+type ButtonProps <T extends ButtonType> = {
+  as : T,
+} & ComponentPropsWithoutRef<T>
+
+
+
+const Button = <T extends ButtonType>({ 
+  as,
+  ...props
+} : ButtonProps<T>) => {
+  if (as === "a") {
+    return (
+      <a {...props as ComponentPropsWithoutRef<T> }>{props.children}</a>
+    )
+  }
+
+  return <button {...props }>{props.children}</button>
+}
+
+
+
+//// ---------------WORKING------------
+
+
+type ButtonProps = PropsWithChildren<{
+  as : "a"
+} & AnchorHTMLAttributes<HTMLAnchorElement> | {
+  as : "button"
+} & ButtonHTMLAttributes<HTMLButtonElement>>
+
+
+const Button = ({ as, children, ...props } : ButtonProps) => {
+
+  if (as === 'a') {
+
+    const rest = props
+
+    return <a {...rest} >{children}</a>
+  }
+  const rest = props
+
+  return <button {...rest} >{children}</button> 
