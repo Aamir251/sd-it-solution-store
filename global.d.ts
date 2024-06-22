@@ -18,8 +18,9 @@ type Product = {
   category : Reference
 }
 
+type ProductSingle = Omit<Product, "Thumbnail" | "category">
 
-type ProductBasic = Omit<Product, | "Image" | "description">
+type ProductBasic = Omit<Product, "description" | "Image">
 
 type ProductDescription = Array<{
   children?: Array<{
@@ -39,3 +40,10 @@ type ProductDescription = Array<{
   _type: "block";
   _key: string;
 }>;
+
+
+type SessionStorageCartItem = {
+  slug : string
+  _id : string
+  qty : number
+}

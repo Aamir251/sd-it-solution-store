@@ -17,7 +17,7 @@ const config: Config = {
         "light-gray" : "#ECECEC",
         "primary-orange" : "#E35656",
         "black-one" : "#191818",
-        "black-two" : "#3B3B3B"
+        "black-two" : "#3B3B3B",
       }
     },
   },

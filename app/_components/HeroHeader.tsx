@@ -1,7 +1,7 @@
 
 import Container from "@/components/globals/Container"
 import HeroBackgroundImage from "./HeroBackgroundImage"
-import Button from "@/components/ui/Button"
+import Link from "next/link"
 
 const HeroHeader = () => {
   return <div className="relative" >
@@ -10,9 +10,9 @@ const HeroHeader = () => {
         <h1 className='text-6xl'>SD IT Solutions</h1>
         <p className="mt-4">Get latest Office and Windows at Affordable Prices</p>
 
-        <Button variant="primary" as='link' className="mt-4">
+        <Link href={`/category/windows`} className="mt-4 btn-primary">
           Shop Now
-        </Button>
+        </Link>
       </article>
     </Container>
     <HeroBackgroundImage />

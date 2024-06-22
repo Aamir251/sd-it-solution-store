@@ -47,3 +47,51 @@ const Button = ({ as, children, ...props } : ButtonProps) => {
   const rest = props
 
   return <button {...rest} >{children}</button> 
+
+
+
+
+
+  ## 2nd version that works in Dev but fails in Prod
+
+  import Link from "next/link"
+import { ComponentPropsWithoutRef, PropsWithChildren } from "react"
+
+type ButtonType = "a" | "button"
+
+type Variants = "primary" | "secondary"
+
+type ButtonProps <T extends ButtonType> = PropsWithChildren<{
+  as : T,
+  className : string,
+  variant : Variants
+} & ComponentPropsWithoutRef<T>>
+
+type BtnStyle = {
+  [ key in Variants] : string
+}
+
+const btnStyles : BtnStyle = {
+  primary : "btn-primary",
+  secondary : "btn-secondary"
+}
+
+const Button = <T extends ButtonType>({ 
+  as,
+  className,
+  variant,
+  children,
+  ...props
+} : ButtonProps<T>) => {
+  const style = btnStyles[variant]
+  
+  if (as === "a") {
+    return (
+      <a className={`${style} ${className}`} {...props }>{children}</a>
+    )
+  }
+
+  return <button className={`${style} ${className}`} {...props }>{children}</button>
+}
+
+export default Button

@@ -17,7 +17,7 @@ const ProductCard = ({ name, Thumbnail, slug, categorySlug } : ProductCardProps)
 
       </figure>
       <h3 className="mt-7 mb-2 text-black-two font-bold">{name}</h3>
-      <Link className="orange-link" href={`/products/${categorySlug.current}/${slug.current}`}>
+      <Link className="orange-link" href={`/products/${slug.current}`}>
         Buy Now
       </Link>
     </article>

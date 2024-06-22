@@ -23,6 +23,10 @@
 }
 
 
+a {
+  font-family: var(--font-family-poppins);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -52,4 +56,12 @@
 
 .btn-bottom-border {
   @apply font-semibold text-lg block text-black-one cursor-pointer border-0 border-b border-black-one hover:text-primary-orange hover:border-primary-orange
+}
+
+.btn-black {
+  @apply bg-black text-white rounded-sm px-6 py-2
+}
+
+.products-cards-wrapper {
+  flex: auto;
 }

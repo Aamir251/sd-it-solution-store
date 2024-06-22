@@ -1,4 +1,3 @@
-import Container from "@/components/globals/Container"
 import LogosCollection from "@/assets/images/logos-collection.png"
 import Image from "next/image"
 

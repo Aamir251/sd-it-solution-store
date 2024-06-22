@@ -5,6 +5,7 @@ import ProductsSection from "@/components/ProductsSection";
 
 
 const fetchHomePageData = async () => {
+
   const resp = await getHomepageProducts()
   
   const { windowsData, officeData } = resp
