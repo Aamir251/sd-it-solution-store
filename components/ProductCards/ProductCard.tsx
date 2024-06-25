@@ -3,10 +3,11 @@ import { urlForImage } from "@/sanity/lib/image";
 import Image from "next/image"
 import Link from "next/link"
 import { Slug } from "sanity";
+import AddToCartBtn from "./AddToCartBtn";
 
-type ProductCardProps = ProductBasic & { categorySlug : Slug }
+type ProductCardProps = ProductBasic
 
-const ProductCard = ({ name, Thumbnail, slug, categorySlug } : ProductCardProps) => {
+const ProductCard = ({ name, Thumbnail, slug, _id } : ProductCardProps) => {
 
   const thumbnailUrl = urlForImage(Thumbnail)
   
@@ -17,9 +18,12 @@ const ProductCard = ({ name, Thumbnail, slug, categorySlug } : ProductCardProps)
 
       </figure>
       <h3 className="mt-7 mb-2 text-black-two font-bold">{name}</h3>
-      <Link className="orange-link" href={`/products/${slug.current}`}>
-        Buy Now
-      </Link>
+      <div className="flex justify-between w-full items-center mt-2.5 px-2">
+        <Link className="btn-black text-sm font-poppins btn-small" href={`/products/${slug.current}`}>
+          Buy Now
+        </Link>
+        <AddToCartBtn imageUrl={thumbnailUrl} _id={_id} name={name} qty={1} slug={slug.current} />
+      </div>
     </article>
   )
 }

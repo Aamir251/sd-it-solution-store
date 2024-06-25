@@ -1,17 +1,15 @@
 import { urlForImage } from "@/sanity/lib/image"
 import { getSingleProduct } from "@/sanity/lib/queries"
 import Image from "next/image"
-import QuantityDropdown from "../_components/QuantityDropdown"
-import ActionButtons from "../_components/ActionButtons"
 import Actions from "../_components/Actions"
-
+import { addComaToNumber } from "@/utils/cart"
+import Container from "@/components/globals/Container"
 
 type SingleProductPageProps = {
   params : {
     slug : string
   }
 }
-
 
 const SingleProductPage = async ({ params } : SingleProductPageProps) => {
 
@@ -20,22 +18,22 @@ const SingleProductPage = async ({ params } : SingleProductPageProps) => {
   const imageUrl = urlForImage(productImage)
 
   return (
-    <section>
+    <Container as="section" className="mt-20">
       
-      <article className="grid lg:grid-cols-2">
-        <figure className="relative w-full h-96">
+      <article className="grid lg:grid-cols-2 gap-x-10">
+        <figure className="relative w-full h-[600px]">
           <Image src={imageUrl} alt={name} style={{ objectFit : "cover"}} layout="fill" />
         </figure>
 
-        <div>
-          <h1>{name}</h1>
-          <h5>{price}</h5>
+        <div className="pt-4">
+          <h1 className="text-3xl font-bold text-black-two">{name}</h1>
+          <h5 className="text-3xl font-bold text-primary-orange mt-2">Rs. {addComaToNumber(price)}</h5>
 
-          <Actions _id={_id} quantity={quantity} slug={slug} />
+          <Actions imageUrl={imageUrl} _id={_id} name={name} qty={quantity} slug={slug.current} />
         </div>
       </article>
 
-    </section>
+    </Container>
   )
 }
 
