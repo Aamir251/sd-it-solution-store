@@ -9,6 +9,7 @@ type ProductCards = {
 }
 
 const ProductCards = ({ products, categorySlug } : ProductCards ) => {
+  console.log({ products })
   return (
     <>
     <div className="grid gap-7 md:grid-cols-3 lg:grid-cols-4 ">

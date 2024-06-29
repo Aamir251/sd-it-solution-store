@@ -1,9 +1,9 @@
 "use client"
 
 import ActionButtons from "./ActionButtons"
-import QuantityDropdown from "./QuantityDropdown"
 import { useCallback, useState } from "react";
 import type { CartItem } from "@/types/cart";
+import QuantityDropdown from "@/components/globals/QuantityDropdown";
 
 
 type ActionsProps = CartItem
@@ -20,7 +20,7 @@ const Actions = (props: ActionsProps) => {
 
   return (
     <>
-      <QuantityDropdown updateQuantity={updateQuantity} maxQuantity={props.qty} />
+      <QuantityDropdown updateQuantity={updateQuantity} inStock={props.qty} />
 
       <ActionButtons {...propsToPass} />
     </>

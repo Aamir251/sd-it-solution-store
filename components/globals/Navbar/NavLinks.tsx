@@ -28,9 +28,8 @@ const NavLinks = () => {
   return (
     <ul className="flex gap-x-6 items-center">
       {
-        links.map(({ href, name }) => <Link className="nav}+link" key={name.toLowerCase()} href={href}>{name}</Link>)
+        links.map(({ href, name }) => <Link className="navlink" key={name.toLowerCase()} href={href}>{name}</Link>)
       }
-
       <CartIcon />
     </ul>
   )

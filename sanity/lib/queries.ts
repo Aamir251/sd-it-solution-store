@@ -25,8 +25,8 @@ export type HomepageProducts = {
 export async function getHomepageProducts(): Promise<HomepageProducts> {
 
     const query = groq`{
-            'windowsData' : *[_type == 'category' && slug.current == 'windows'] { 'products' : *[_type == "product" && references(^._id)] {_id, name, slug, price, Thumbnail, category}, slug}[0...4],
-            'officeData' : *[_type == 'category' && slug.current == 'office-for-windows'] { 'products' : *[_type == "product" && references(^._id) ] {_id, name, slug, price, Thumbnail, category}, slug}[0...4]
+            'windowsData' : *[_type == 'category' && slug.current == 'windows'] { 'products' : *[_type == "product" && references(^._id)] {_id, name, slug, price, Thumbnail, category, quantity }, slug}[0...4],
+            'officeData' : *[_type == 'category' && slug.current == 'office-for-windows'] { 'products' : *[_type == "product" && references(^._id) ] {_id, name, slug, price, Thumbnail, category, quantity }, slug}[0...4]
           }`
 
     return await client.fetch(query)

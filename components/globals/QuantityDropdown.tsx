@@ -3,13 +3,13 @@
 import { ChangeEvent } from "react";
 
 type QuantityDropdownProps = {
-  maxQuantity : number
+  inStock : number
   updateQuantity : (newQuantity: number) => void
 }
 
-const QuantityDropdown = ({ maxQuantity, updateQuantity } : QuantityDropdownProps) => {
+const QuantityDropdown = ({ inStock, updateQuantity } : QuantityDropdownProps) => {
   
-  const maxOrderQuantityToShow : number = maxQuantity < 5 ? maxQuantity : maxQuantity >= 10 ? 8 : maxQuantity
+  const maxOrderQuantityToShow : number = inStock < 5 ? inStock : inStock >= 10 ? 8 : inStock
 
   const handleChange = (e : ChangeEvent<HTMLSelectElement>) => {
     updateQuantity(Number(e.target.value.trim()))

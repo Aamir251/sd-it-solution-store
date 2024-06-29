@@ -5,7 +5,9 @@ export type CartItem = {
   slug : string
   name : string
   qty : number
+  price : number
   imageUrl : string
+  inStock : number // this refers to the maximum quantity that the user can order
 }
 
 

@@ -16,6 +16,7 @@ const SingleProductPage = async ({ params } : SingleProductPageProps) => {
   const { name, _id, Image : productImage, price, description, quantity, slug } = await getSingleProduct(params.slug)
 
   const imageUrl = urlForImage(productImage)
+    
 
   return (
     <Container as="section" className="mt-20">
@@ -29,7 +30,7 @@ const SingleProductPage = async ({ params } : SingleProductPageProps) => {
           <h1 className="text-3xl font-bold text-black-two">{name}</h1>
           <h5 className="text-3xl font-bold text-primary-orange mt-2">Rs. {addComaToNumber(price)}</h5>
 
-          <Actions imageUrl={imageUrl} _id={_id} name={name} qty={quantity} slug={slug.current} />
+          <Actions price={price} inStock={quantity} imageUrl={imageUrl} _id={_id} name={name} qty={quantity} slug={slug.current} />
         </div>
       </article>
 

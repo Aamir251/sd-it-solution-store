@@ -7,9 +7,9 @@ import Link from "next/link"
 type ActionButtonsProps = CartItem
 
 const ActionButtons = (props : ActionButtonsProps) => {
-
-  const { addItem, deleteItem, updateQty } = useCartContext()
-
+  console.log({ props });
+  
+  const { addItem } = useCartContext()
   return (
     <div className="flex gap-x-6 items-center mt-6">
       <Link className="btn-black" href={`/buy-now?${props.slug}`}>
