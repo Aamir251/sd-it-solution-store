@@ -6,7 +6,6 @@ import { CartItem } from "@/types/cart"
 
 
 const AddToCartBtn = (props : CartItem) => {
-  console.log({ props });
   
   const { addItem } = useCartContext()
 

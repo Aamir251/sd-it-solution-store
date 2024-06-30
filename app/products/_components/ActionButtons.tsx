@@ -7,7 +7,6 @@ import Link from "next/link"
 type ActionButtonsProps = CartItem
 
 const ActionButtons = (props : ActionButtonsProps) => {
-  console.log({ props });
   
   const { addItem } = useCartContext()
   return (
