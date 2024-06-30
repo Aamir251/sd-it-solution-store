@@ -1,6 +1,6 @@
 import { client } from "./client"
 import { groq } from "next-sanity"
-import { CategoryList, ProductAndCategorySlug } from "./types"
+import { CategoryList, OrderDoc, OrderItem, ProductAndCategorySlug } from "./types"
 import { ProductSingle } from "@/global"
 
 export const generateGetProductsByCategoryQuery = (category: string, maxCount?: number) => {
@@ -41,4 +41,11 @@ export const getSingleProduct = async (productSlug : string):Promise<ProductSing
   const query = groq`*[_type=="product" && slug.current=="${productSlug}"] {name, slug, _id, Image, price, description,quantity}`
 
   return await client.fetch(query).then(data => data[0])
+}
+
+export const createOrderItem = async (item : OrderDoc) => {
+  
+  return await client.create(item, {
+    token : process.env.NEXT_PUBLIC_CREATE_ORDER_TOKEN
+  })
 }

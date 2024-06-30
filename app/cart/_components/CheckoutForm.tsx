@@ -2,8 +2,10 @@
 
 import { useCartContext } from "@/ContextProviders/CartContext"
 import FullPageLoader from "@/components/globals/FullPageLoader"
+import { OrderDoc } from "@/sanity/lib/types"
 import { CartItem } from "@/types/cart"
 import { createOrderId } from "@/utils/razorpay"
+import { createOrderDocInSanity } from "@/utils/sanity"
 import { useState } from "react"
 
 type CheckoutFormProps = {
@@ -21,11 +23,11 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
   const { items } = useCartContext()
 
   const [isLoading, setIsLoading] = useState(false)
+  const [ shouldStopBtn, setShouldStopBtn] = useState(false)
 
   const processPayment = (items: CartItem[]) => async (e: React.FormEvent<HTMLFormElement>) => {
-
+    setShouldStopBtn(true)
     e.preventDefault();
-    setIsLoading(true)
     try {
       const formData = new FormData(e.currentTarget)
       const email = formData.get("email") as string
@@ -69,7 +71,22 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
             /**
              * Handle Successful Payment
             */
-            window.location.href = "/success"
+            setIsLoading(true)
+            const orderObj : OrderDoc = {
+              orderId,
+              customerName : name,
+              email,
+              _type : "orders",
+              contact : Number(contact),
+              items : items.map(({ _id, name, qty, price  }) => ({
+                productId : _id,
+                productName : name,
+                quantity : qty,
+                price
+              }))
+            }
+            const res = await createOrderDocInSanity(orderObj)
+            console.log({ res })
           }
           else {
             alert(res.message);
@@ -101,7 +118,7 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
   const handleSubmit = processPayment(items)
   return (
     <div className="fixed top-0 left-0 flex-center h-screen w-screen bg-black/60">
-      { isLoading && <FullPageLoader text="Processing Payment. Please Wait..." /> }
+      { isLoading && <FullPageLoader text="Please Wait... Do not refresh the page" /> }
       <form onSubmit={handleSubmit} className="w-11/12 max-w-3xl border bg-white py-10 px-5">
         <div className="relative py-3 sm:max-w-xl sm:mx-auto">
           <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
@@ -130,7 +147,7 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
                   <button onClick={hideForm} type="button" className="flex w-max justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none">
                     <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg> Cancel
                   </button>
-                  <button type="submit" className="btn-black">Proceed</button>
+                  <button aria-disabled={shouldStopBtn} disabled={shouldStopBtn} type="submit" className="btn-black">Proceed</button>
                 </div>
               </div>
             </div>

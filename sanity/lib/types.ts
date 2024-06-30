@@ -11,3 +11,21 @@ export type CategoryList = {
   slug : Slug
   name : string
 }
+
+
+export type OrderItem = {
+  productId : string
+  productName : string
+  quantity : number
+  price : number
+}
+
+export type OrderDoc = {
+  _type : "orders"
+  orderId : string
+  customerName : string
+  email : string
+  contact : number
+  items : OrderItem[]
+  
+}
