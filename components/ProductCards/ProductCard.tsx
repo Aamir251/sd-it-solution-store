@@ -2,24 +2,29 @@ import type {  ProductBasic } from "@/global"
 import { urlForImage } from "@/sanity/lib/image";
 import Image from "next/image"
 import Link from "next/link"
-import { Slug } from "sanity";
+import AddToCartBtn from "./AddToCartBtn";
 
-type ProductCardProps = ProductBasic & { categorySlug : Slug }
+type ProductCardProps = ProductBasic
 
-const ProductCard = ({ name, Thumbnail, slug, categorySlug } : ProductCardProps) => {
+const ProductCard = ({ name, Thumbnail, slug, _id, quantity, price } : ProductCardProps) => {
 
   const thumbnailUrl = urlForImage(Thumbnail)
   
   return (
     <article className="flex flex-col justify-center items-start py-6 px-3 bg-light-gray max-w-64">
+
       <figure className="w-full max-w-[200px] h-[190px] relative">
         <Image src={thumbnailUrl} alt={name} layout="fill" style={{ objectFit : "cover" }} />
-
       </figure>
+
       <h3 className="mt-7 mb-2 text-black-two font-bold">{name}</h3>
-      <Link className="orange-link" href={`/products/${slug.current}`}>
-        Buy Now
-      </Link>
+      <div className="flex justify-between w-full items-center mt-2.5 px-2">
+        <Link className="btn-black text-sm font-poppins btn-small" href={`/products/${slug.current}`}>
+          Buy Now
+        </Link>
+        <AddToCartBtn price={price} imageUrl={thumbnailUrl} _id={_id} name={name} qty={1} inStock={quantity} slug={slug.current} />
+      </div>
+      
     </article>
   )
 }

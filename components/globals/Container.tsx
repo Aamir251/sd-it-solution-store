@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react"
 
 type ContainerProps = PropsWithChildren<{
   className?: string,
-  as?: "section" | "div" | "article"
+  as?: "section" | "div" | "article" | "nav"
 
 }>
 

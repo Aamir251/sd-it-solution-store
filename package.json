@@ -12,8 +12,10 @@
   "dependencies": {
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.46.1",
+    "crypto": "^1.0.1",
     "next": "14.2.4",
     "next-sanity": "^9.3.10",
+    "razorpay": "^2.9.4",
     "react": "^18",
     "react-dom": "^18",
     "sanity": "^3.46.1",

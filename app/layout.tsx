@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { Cairo, Poppins } from 'next/font/google'
+import CartContextProvider from "@/ContextProviders/CartContext";
+import Navbar from "@/components/globals/Navbar";
 
 const cairo = Cairo({
   variable: '--font-family-cairo',
@@ -28,7 +30,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${cairo.variable} ${poppins.variable}`}>{children}</body>
+      <CartContextProvider>
+        <body className={`${cairo.variable} ${poppins.variable}`}>
+          <Navbar />
+          {children}
+        </body>
+      </CartContextProvider>
     </html>
   );
 }

@@ -9,3 +9,7 @@ export const checkIfItemAlreadyPresentInCart = (id : Id) : boolean => {
 
   return existingItems.some(item  => item._id === id)
 }
+
+export const addComaToNumber = (amount : number) => {
+  return new Intl.NumberFormat('en-IN').format(amount)
+}

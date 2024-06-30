@@ -15,7 +15,6 @@ const ProductCards = ({ products, categorySlug } : ProductCards ) => {
     {
       products && products.map(product => <ProductCard 
         key={product._id} 
-        categorySlug={categorySlug} 
         {...product} 
       />)
     }
