@@ -8,7 +8,6 @@ export const generateGetProductsByCategoryQuery = (category: string, maxCount?: 
   return groq`*[_type=="category" && slug.current=='${category.trim()}']{ 'products':*[_type=='product' && references(^._id)]{_id, name, slug,price,Thumbnail,category},slug }`
 }
 
-
 export async function getProductsByCategory(category: string, maxCount?: number) : Promise<ProductAndCategorySlug> {
   
   const productByCategoryQuery = generateGetProductsByCategoryQuery(category, maxCount)
