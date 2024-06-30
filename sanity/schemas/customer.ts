@@ -9,19 +9,16 @@ export const customerType = defineType({
             name : 'name',
             title : "Name",
             type : 'string',
-            readOnly : true,
         }),
         defineField({
             name : 'email',
             title : "Email",
             type : 'string',
-            readOnly : true,
         }),
         defineField({
             name : 'contact',
             title : "Contact",
             type : 'number',
-            readOnly : true,
         }),
         defineField({
             name : 'discountEligibility',

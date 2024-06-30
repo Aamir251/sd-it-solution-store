@@ -1,5 +1,4 @@
 "use client"
-import { useCartContext } from '@/ContextProviders/CartContext';
 import Script from 'next/script';
 import { useState } from 'react';
 import CheckoutForm from './CheckoutForm';
@@ -7,7 +6,7 @@ import CheckoutForm from './CheckoutForm';
 
 const ProceedToCheckoutBtn = () => {
 
-  const [ showCheckoutForm, setShowCheckoutForm ] = useState<boolean>(true)
+  const [ showCheckoutForm, setShowCheckoutForm ] = useState<boolean>(false)
 
   const hideForm = setShowCheckoutForm.bind(null, false)
 

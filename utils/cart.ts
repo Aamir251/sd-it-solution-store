@@ -1,4 +1,5 @@
 import { SessionStorageCartItem } from "@/global"
+import { CartItem } from "@/types/cart"
 import { Id } from "sanity"
 
 export const checkIfItemAlreadyPresentInCart = (id : Id) : boolean => {
@@ -10,6 +11,11 @@ export const checkIfItemAlreadyPresentInCart = (id : Id) : boolean => {
   return existingItems.some(item  => item._id === id)
 }
 
-export const addComaToNumber = (amount : number) => {
-  return new Intl.NumberFormat('en-IN').format(amount)
+export const addComaToNumber = (amount : number | string) => {
+  return new Intl.NumberFormat('en-IN').format(Number(amount))
+}
+
+
+export const getTotal = (items : CartItem[]) => {
+  return items.reduce((prev, curr) => prev + curr.price * curr.qty, 0)
 }

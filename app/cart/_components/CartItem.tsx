@@ -24,7 +24,7 @@ const CartItem = ({ _id, name, qty, slug, imageUrl, inStock, price } : CartItem)
         </Link>
       </h3>
       <h5>₹{addComaToNumber(price)}</h5>
-      <QuantityDropdown inStock={inStock}  updateQuantity={updateQuantity} />
+      <QuantityDropdown defaultValue={qty}  inStock={inStock}  updateQuantity={updateQuantity} />
       <h5>₹{addComaToNumber(total)}</h5>
     </article>
   )

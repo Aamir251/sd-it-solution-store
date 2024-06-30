@@ -49,3 +49,10 @@ export const createOrderItem = async (item : OrderDoc) => {
     token : process.env.NEXT_PUBLIC_CREATE_ORDER_TOKEN
   })
 }
+
+export const getDiscountValueForCustomer = async (email : string) : Promise<{
+  discountEligibility : number
+}> => {
+  const query = groq`*[_type=="customers" && email=="${email}"]{discountEligibility}`
+  return await client.fetch(query).then(data => data[0])
+}
