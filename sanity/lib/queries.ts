@@ -5,7 +5,7 @@ import { ProductSingle } from "@/global"
 
 export const generateGetProductsByCategoryQuery = (category: string, maxCount?: number) => {
   const limit = maxCount ? `[0...${maxCount}]` : ''
-  return groq`*[_type=='category' && slug.current=='${category.trim()}']{ 'products':*[_type=='product' && references(^._id)]{_id, name, slug,price,Thumbnail,category},slug}`
+  return groq`*[_type=='category' && slug.current=='${category.trim()}']{ 'products':*[_type=='product' && references(^._id)]{_id, name, slug,price,Thumbnail,category, quantity},slug}`
 }
 
 export async function getProductsByCategory(category: string, maxCount?: number) : Promise<ProductAndCategorySlug> {
@@ -55,4 +55,10 @@ export const getDiscountValueForCustomer = async (email : string) : Promise<{
 }> => {
   const query = groq`*[_type=="customers" && email=="${email}"]{discountEligibility}`
   return await client.fetch(query).then(data => data[0])
+}
+
+export const changeProductQuantity = async (productId : string, newQuantity : number) => {
+  return client.patch(productId).set({ quantity : newQuantity }).commit({ 
+    token : process.env.NEXT_PUBLIC_CREATE_ORDER_TOKEN
+  })
 }

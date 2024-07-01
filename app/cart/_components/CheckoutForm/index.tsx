@@ -5,7 +5,7 @@ import OrderDetailsForm from "./OrderDetailsForm"
 import { OrderDoc } from "@/sanity/lib/types"
 import { createOrderId } from "@/utils/razorpay"
 import { CartItem } from "@/types/cart"
-import { Dispatch, useState } from "react"
+import { useState } from "react"
 import { useCartContext } from "@/ContextProviders/CartContext"
 import { useSessionStorage } from "@/hooks/useSessionStorage"
 import { useRouter } from "next/navigation"
@@ -55,9 +55,6 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
         name: 'name',
         description: 'description',
         order_id: orderId,
-        "notes": {
-          "hello": "world"
-        },
         handler: async function (response: any) {
           const data = {
             orderCreationId: orderId,
@@ -123,8 +120,12 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
     <>
       <div className="fixed top-0 left-0 flex-center h-screen w-screen bg-black/60">
         <form onSubmit={handleSubmit} className="w-11/12 max-w-3xl border bg-white py-10 px-5">
-          {stepCount === 1 && <UserInfoForm setEmail={setEmail} hideForm={hideForm} showStepTwo={showStepTwo} />}
-          {stepCount === 2 && <OrderDetailsForm discount={discount} setDiscount={setDiscount} email={email} />}
+          <div className={`${stepCount === 1 ? "block" : "hidden"}`}>
+            <UserInfoForm setEmail={setEmail} hideForm={hideForm} showStepTwo={showStepTwo} />
+          </div>
+          
+          { stepCount === 2 && <OrderDetailsForm goBack={showStepOne} discount={discount} setDiscount={setDiscount} email={email} />}
+        
         </form>
       </div>
     </>
