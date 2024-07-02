@@ -58,7 +58,7 @@ export const getDiscountValueForCustomer = async (email : string) : Promise<{
 }
 
 export const changeProductQuantity = async (productId : string, newQuantity : number) => {
-  return client.patch(productId).set({ quantity : newQuantity }).commit({ 
+  return client.patch(productId).dec({ quantity : newQuantity }).commit({ 
     token : process.env.NEXT_PUBLIC_CREATE_ORDER_TOKEN
   })
 }

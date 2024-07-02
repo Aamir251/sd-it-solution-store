@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { OrderDoc } from "@/sanity/lib/types";
 import { createOrderDocInSanity, mutateProductQuantityInSanity } from "@/utils/sanity";
 import ProcessingOrderLoader from "./_components/ProcessingOrderLoader";
+import { useRouter } from "next/navigation";
 
 type ProcessingOrderPageProps = {
   searchParams : {
@@ -13,9 +14,11 @@ type ProcessingOrderPageProps = {
 }
 
 const ProcessingOrderPage = ({ searchParams } : ProcessingOrderPageProps) => {
-  console.log("mounted ")
+  
+  const router = useRouter()
   const { orderId } = searchParams;
   const { data, setData } = useSessionStorage("sd-order", {})
+  const { setData : setCartItems } = useSessionStorage("sd-cart", [])
   
   const [ isLoading, setIsLoading ] = useState<boolean>(true)
 
@@ -40,11 +43,12 @@ const ProcessingOrderPage = ({ searchParams } : ProcessingOrderPageProps) => {
         console.log({ error })
       } finally {
         setIsLoading(false)
-        // setData({})
+        router.push(`/order-success?email=${doc.email}&orderId=${doc.orderId}`)
+        setData({})
+        setCartItems([]) // clear the cart
       }
     }
 
-    console.log({ data, orderId })
     if (data && isOrderDoc(data, orderId)) {
       createDocInSanity(data)
     }

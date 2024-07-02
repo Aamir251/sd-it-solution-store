@@ -11,7 +11,7 @@ type ProductCards = {
 const ProductCards = ({ products, categorySlug } : ProductCards ) => {
   return (
     <>
-    <div className="grid gap-7 md:grid-cols-3 lg:grid-cols-4 ">
+    <div className="grid gap-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
     {
       products && products.map(product => <ProductCard 
         key={product._id} 

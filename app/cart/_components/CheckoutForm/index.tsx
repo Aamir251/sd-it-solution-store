@@ -10,6 +10,7 @@ import { useCartContext } from "@/ContextProviders/CartContext"
 import { useSessionStorage } from "@/hooks/useSessionStorage"
 import { useRouter } from "next/navigation"
 import { getTotal } from "@/utils/cart"
+import FullPageLoader from "@/components/globals/FullPageLoader"
 
 type CheckoutFormProps = {
   hideForm: () => void
@@ -21,15 +22,17 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
   const { items } = useCartContext()
   const { setData: saveOrderItemToSession } = useSessionStorage("sd-order", {})
   const router = useRouter()
-  const [ email, setEmail ] = useState<string>("")
+  const [email, setEmail] = useState<string>("")
 
   const [stepCount, setStepCount] = useState<1 | 2>(1)
 
   const showStepTwo = setStepCount.bind(null, 2)
   const showStepOne = setStepCount.bind(null, 1)
 
-  const [ discount, setDiscount ] = useState<number>(0)
-  
+  const [discount, setDiscount] = useState<number>(0)
+
+  const [showOverlay, setShowOverlay] = useState<boolean>(false)
+
 
   const processPayment = (items: CartItem[]) => async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,7 +43,7 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
       const contact = formData.get("contact") as unknown as number
 
       const currency = 'INR'
-      const amount = getTotal(items) - ((discount/100) * getTotal(items))
+      const amount = getTotal(items) - ((discount / 100) * getTotal(items))
       const notes = {
         name,
         email,
@@ -101,6 +104,12 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
         theme: {
           color: '#3399cc',
         },
+        modal: {
+          ondismiss: () => {
+            setShowOverlay(false)
+
+          }
+        }
       };
       const win = window as any
       const paymentObject = new win.Razorpay(options);
@@ -109,6 +118,8 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
         alert(response.error.description);
       });
       paymentObject.open();
+      setShowOverlay(true)
+
     } catch (error) {
       console.log(error);
     }
@@ -118,14 +129,15 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
 
   return (
     <>
+      {showOverlay && <FullPageLoader />}
       <div className="fixed top-0 left-0 flex-center h-screen w-screen bg-black/60">
         <form onSubmit={handleSubmit} className="w-11/12 max-w-3xl border bg-white py-10 px-5">
           <div className={`${stepCount === 1 ? "block" : "hidden"}`}>
             <UserInfoForm setEmail={setEmail} hideForm={hideForm} showStepTwo={showStepTwo} />
           </div>
-          
-          { stepCount === 2 && <OrderDetailsForm goBack={showStepOne} discount={discount} setDiscount={setDiscount} email={email} />}
-        
+
+          {stepCount === 2 && <OrderDetailsForm goBack={showStepOne} discount={discount} setDiscount={setDiscount} email={email} />}
+
         </form>
       </div>
     </>

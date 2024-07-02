@@ -5,13 +5,15 @@ export async function POST(req: Request) {
   try {
     const data = await req.json() as OrderItem[]
 
-    console.log("Data received in API ", data)
+
+    /**
+     * updating the quantity of all the products (in CMS) that have been ordered
+     */
     const changeProductPromises = data.map(({ productId, quantity }) => changeProductQuantity(productId, quantity))
 
     
-    Promise.all(changeProductPromises).then(values => {
-      console.log(values)
-    })
+    await Promise.all(changeProductPromises)
+    
 
     // const resp = await changeProductQuantity()
     // console.log({ resp })
