@@ -11,9 +11,9 @@ const ProductCard = ({ name, Thumbnail, slug, _id, quantity, price } : ProductCa
   const thumbnailUrl = urlForImage(Thumbnail)
   
   return (
-    <article className="flex flex-col justify-center items-start py-6 px-3 bg-light-gray max-w-full  sm:max-w-64">
+    <article className="flex flex-col justify-center items-start py-6 px-3 bg-light-gray max-w-full  lg:max-w-64">
 
-      <figure className="w-full  sm:max-w-[200px] h-[320px] sm:h-[190px] relative">
+      <figure className="w-full h-[340px] sm:h-[320px] lg:h-[200px]   relative">
         <Image src={thumbnailUrl} alt={name} layout="fill" style={{ objectFit : "cover" }} />
       </figure>
 

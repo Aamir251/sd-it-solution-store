@@ -7,7 +7,7 @@ const HeroSection = () => {
       <article className="flex justify-between items-center py-20">
         <h1 className="text-4xl font-semibold">Shop the best softwares</h1>
 
-        <figure className="relative h-44 w-60">
+        <figure className="hidden md:block relative h-44 w-60">
           <Image 
             src={LogosCollection} 
             alt="shop best softwares"

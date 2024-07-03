@@ -29,7 +29,7 @@ const ProductsByCategoryPage = async ({ params } : ProductsByCategoryPageProps) 
   const { products } = await getProductsByCategory(productsCategory)
   
 	return (
-		<div className="grid grid-cols-3 gap-x-6">
+		<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 md:gap-x-10 gap-y-12">
       {
         products.map(product => <ProductCard key={product._id} {...product} /> )
       }

@@ -19,9 +19,9 @@ const ProducsByCategoryPageLayout = ({ children, params }: Props) => {
     <Container as="div">
       <HeroSection />
 
-      <section className="flex gap-x-10">
+      <section className="flex flex-col lg:flex-row gap-x-10 pb-14">
         <ProductsCategorySideBar categoryParam={category}  />
-        <div className="products-cards-wrapper">
+        <div className="products-cards-wrapper mt-6 lg:mt-0">
           {children}
         </div>
       </section>

@@ -3,35 +3,48 @@ import CartIcon from "./CartIcon"
 
 
 type LinkItem = {
-  name : string
-  href : string
+  name: string
+  href: string
 }
 
-const links : LinkItem[] = [
+const links: LinkItem[] = [
   {
-    name : "Home",
-    href : "/"
+    name: "Home",
+    href: "/"
   },
   {
-    name : "Contact Us",
-    href : "/contact-us"
+    name: "Contact Us",
+    href: "/contact-us"
   },
   {
-    name : "About Us",
-    href : "/about-us"
+    name: "About Us",
+    href: "/about-us"
   },
-  
+
 ]
 
 
-const NavLinks = () => {
+type NavLinksProps = {
+  showDropdown : boolean
+}
+
+const NavLinks = ({ showDropdown } : NavLinksProps) => {
+
   return (
-    <ul className="flex gap-x-6 items-center">
-      {
-        links.map(({ href, name }) => <Link className="navlink" key={name.toLowerCase()} href={href}>{name}</Link>)
-      }
-      <CartIcon />
-    </ul>
+    <div className={`w-full ${showDropdown ? "block" : "hidden"} md:block absolute left-0 top-[58px] bg-white  md:static md:w-auto z-20`}>
+
+      <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white md:items-center">
+        {
+          links.map(({ href, name }) => <Link
+            className="navlink"
+            aria-current="page"
+            key={name.toLowerCase()} href={href}>
+              {name}
+          </Link>)
+        }
+        <CartIcon />
+      </ul>
+    </div>
   )
 }
 

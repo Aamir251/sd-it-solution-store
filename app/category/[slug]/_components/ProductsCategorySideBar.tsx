@@ -1,5 +1,7 @@
 import { getCategoriesList } from "@/sanity/lib/queries"
 import SideBarCategory from "./SideBarCategory"
+import Link from "next/link"
+import MobileCategoryDropdown from "./MobileCategoryDropdown"
 
 
 const fetchCategoriesList = async () => {
@@ -9,24 +11,27 @@ const fetchCategoriesList = async () => {
 
 
 type ProductsCategorySideBarProps = {
-  categoryParam : string
+  categoryParam: string
 }
 
-const ProductsCategorySideBar = async ({ categoryParam } : ProductsCategorySideBarProps) => {
+const ProductsCategorySideBar = async ({ categoryParam }: ProductsCategorySideBarProps) => {
   const categories = await fetchCategoriesList()
 
   return (
-    <aside className="bg-light-gray py-7 px-5 rounded-md grow-0 min-h-60">
+    <aside className="sticky z-10 lg:static top-0 bg-light-gray lg:py-7 lg:px-5 rounded-md grow-0 lg:min-h-60">
 
-      <ul className="flex flex-col gap-y-3">
+      <ul className="hidden lg:flex gap-x-6 lg:flex-col gap-y-3">
         {
-          categories.map(category => <SideBarCategory 
+          categories.map(category => <SideBarCategory
             isActive={categoryParam === category.slug.current}
             key={category._id}
             {...category}
           />)
         }
       </ul>
+
+      {/* for Mobile */}
+      <MobileCategoryDropdown categories={categories} />
 
     </aside>
   )
