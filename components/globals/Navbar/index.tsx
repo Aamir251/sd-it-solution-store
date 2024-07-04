@@ -6,13 +6,16 @@ import NavLinks from "./NavLinks"
 import NavLogo from "./NavLogo"
 
 const Navbar = () => {
-  const [ showDropdown, setShowDropdown ] = useState<boolean>(false)
+  const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
   return (
-    <Container as="nav" className="py-2 flex items-center justify-between">
-      <NavLogo showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
-      <NavLinks showDropdown={showDropdown} />
-    </Container>
+    <header className="py-2 bg-white">
+      <Container as="nav" className="bg-white flex items-center justify-between ">
+        <NavLogo showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
+        <NavLinks showDropdown={showDropdown} />
+
+      </Container>
+    </header>
   )
 }
 

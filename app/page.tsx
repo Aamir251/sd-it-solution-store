@@ -2,6 +2,7 @@ import { getHomepageProducts } from "@/sanity/lib/queries";
 import HeroHeader from "./_components/HeroHeader";
 import ProductsSection from "@/components/ProductsSection";
 
+export const revalidate = 3600 // revalidate the data at most every hour
 
 
 const fetchHomePageData = async () => {

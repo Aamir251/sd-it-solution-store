@@ -17,4 +17,5 @@ Quick Heal Total security
 Quick Internet Security 
 Guardian Netsecure for windows
 
-₹
+
+

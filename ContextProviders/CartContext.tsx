@@ -25,7 +25,6 @@ const CartContextProvider = ({ children }: PropsWithChildren) => {
     const alreadyExistsInCart : boolean = checkIfItemAlreadyPresentInCart(item._id)
 
     if (alreadyExistsInCart) {
-      alert("item already present in Cart")
       return
     }
 

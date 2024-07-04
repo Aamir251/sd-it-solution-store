@@ -22,7 +22,10 @@ type ProductSingle = Omit<Product, "Thumbnail" | "category">
 
 type ProductBasic = Omit<Product, "description" | "Image">
 
-type ProductDescription = Array<{
+
+
+
+type ProductDescription = {
   children?: Array<{
     marks?: Array<string>;
     text?: string;
@@ -39,7 +42,7 @@ type ProductDescription = Array<{
   level?: number;
   _type: "block";
   _key: string;
-}>;
+}[]
 
 
 type SessionStorageCartItem = {
