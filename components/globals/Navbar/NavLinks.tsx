@@ -13,6 +13,10 @@ const links: LinkItem[] = [
     href: "/"
   },
   {
+    name: "Shop Now",
+    href: "/category/office-for-windows"
+  },
+  {
     name: "Contact Us",
     href: "/contact-us"
   },

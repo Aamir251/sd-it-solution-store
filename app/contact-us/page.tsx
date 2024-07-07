@@ -14,7 +14,7 @@ const ContactUsPage = () => {
         <p className="mt-2 text-gray-800 font-poppins">Feel free to react us through the following ways</p>
       </div>
 
-      <div className="grid gap-y-10 md:grid-cols-3 gap-x-4 lg:gap-x-12">
+      <div className="grid gap-y-10 md:grid-cols-3 gap-x-4 lg:gap-x-12 pb-20">
 
         <div className="space-y-5 flex flex-col items-center px-4 py-8 bg-gray-100 rounded-md">
           <div className="p-3 bg-gray-300 rounded-full w-max">

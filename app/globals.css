@@ -20,6 +20,10 @@
     font-family: var(--font-family-poppins);
     
   }
+
+  a {
+    margin-inline-end: 0 !important;
+  }
 }
 
 
@@ -88,3 +92,33 @@ button:disabled {
   @apply px-3 py-1.5
 }
 
+.text-content ul {
+  list-style-type: disc;
+  padding-left: 1rem;
+  list-style-position: inside;
+}
+
+.text-content p {
+  margin-top: 12px;
+  font-size: 14px;
+  margin-left: 14px;
+  line-height: 28px;
+}
+
+
+.text-content h3 {
+  font-size: 20px;
+}
+.text-content h4 {
+  font-size: 18px;
+}
+.text-content h5 {
+  font-size: 16px;
+}
+.text-content h3, 
+.text-content h4,
+.text-content h5
+{
+  font-weight: 600;
+  margin: 12px 0;
+}
