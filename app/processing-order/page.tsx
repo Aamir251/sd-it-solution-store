@@ -6,11 +6,16 @@ import { OrderDoc } from "@/sanity/lib/types";
 import { createOrderDocInSanity, mutateProductQuantityInSanity } from "@/utils/sanity";
 import ProcessingOrderLoader from "./_components/ProcessingOrderLoader";
 import { useRouter } from "next/navigation";
+import { Metadata } from "next";
 
 type ProcessingOrderPageProps = {
   searchParams : {
     orderId : string
   }
+}
+
+export const metadata: Metadata = {
+  title: 'Processing Order',
 }
 
 const ProcessingOrderPage = ({ searchParams } : ProcessingOrderPageProps) => {

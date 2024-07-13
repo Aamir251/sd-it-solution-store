@@ -1,4 +1,5 @@
 import Container from "@/components/globals/Container"
+import { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 
@@ -8,6 +9,12 @@ type OrderSuccessPageProps = {
     orderId : string
     email : string
   }
+}
+
+
+export const metadata: Metadata = {
+  title: 'Order Successful',
+  description: 'Congratulations! Your order has been successful. Thank you for shopping with us.',
 }
 
 const OrderSuccessPage = ({ searchParams } : OrderSuccessPageProps) => {

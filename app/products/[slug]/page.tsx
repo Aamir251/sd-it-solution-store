@@ -6,6 +6,7 @@ import { addComaToNumber } from "@/utils/cart"
 import Container from "@/components/globals/Container"
 import OutOfStockButton from "@/components/ui/OutOfStockButton"
 import ProductDescription from "../_components/ProductDescription"
+import { Metadata, ResolvingMetadata } from "next"
 
 type SingleProductPageProps = {
   params: {
@@ -13,6 +14,27 @@ type SingleProductPageProps = {
   }
 }
 export const revalidate = 3600 // revalidate the data at most every hour
+
+
+export async function generateMetadata(
+  { params }: SingleProductPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  
+
+  const { name } = await getSingleProduct(params.slug)
+ 
+  // fetch data
+  // const product = await fetch(`https://.../${id}`).then((res) => res.json())
+ 
+  // optionally access and extend (rather than replace) parent metadata
+  // const previousImages = (await parent).openGraph?.images || []
+ 
+  return {
+    title: name,
+  }
+}
 
 const SingleProductPage = async ({ params }: SingleProductPageProps) => {
 
@@ -38,7 +60,7 @@ const SingleProductPage = async ({ params }: SingleProductPageProps) => {
               <OutOfStockButton />
             </div> : <Actions price={price} inStock={quantity} imageUrl={imageUrl} _id={_id} name={name} qty={quantity} slug={slug.current} />
           }
-          <ProductDescription description={description}  />
+          {description?.length > 0 && <ProductDescription description={description}  />}
         </div>
 
       </article>

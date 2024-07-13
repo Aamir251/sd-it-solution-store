@@ -1,6 +1,7 @@
 import { getHomepageProducts } from "@/sanity/lib/queries";
 import HeroHeader from "./_components/HeroHeader";
 import ProductsSection from "@/components/ProductsSection";
+import { Metadata } from "next";
 
 export const revalidate = 3600 // revalidate the data at most every hour
 
@@ -17,6 +18,12 @@ const fetchHomePageData = async () => {
   }
 }
 
+
+export const metadata: Metadata = {
+  title: 'SD IT Solution Store',
+  description: 'SD IT Solution Store provides authentic Microsoft Windows, Office, and other IT software. Buy now for secure, reliable software with instant email delivery.',
+}
+ 
 
 export default async function Home() {
 

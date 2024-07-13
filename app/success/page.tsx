@@ -1,5 +1,10 @@
 import Container from "@/components/globals/Container"
+import { Metadata } from "next"
 
+
+export const metadata: Metadata = {
+  title: 'Order Successful',
+}
 const OrderSuccessPage = () => {
   return (
     <>
