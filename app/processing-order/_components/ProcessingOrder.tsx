@@ -1,3 +1,5 @@
+"use client"
+
 import { useSessionStorage } from "@/hooks/useSessionStorage";
 import { OrderDoc } from "@/sanity/lib/types";
 import { createOrderDocInSanity, mutateProductQuantityInSanity } from "@/utils/sanity";
