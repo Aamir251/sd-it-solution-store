@@ -20,7 +20,7 @@ const Footer = () => {
               <Link href="/privacy-policy" className="hover:underline">Privacy Policy</Link>
             </li>
             <li>
-              <Link href="/cancellation-and-refund-policy" className="hover:underline">Terms And Conditions</Link>
+              <Link href="/terms-and-conditions" className="hover:underline">Terms And Conditions</Link>
             </li>
             <li>
               <Link href="/cancellation-and-refund-policy" className="hover:underline">Cancellation And Refund</Link>
