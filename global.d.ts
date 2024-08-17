@@ -1,21 +1,24 @@
 import type { Image, Id } from "sanity"
 import { HomePageQueryResult, Slug } from "./sanity.types"
 
+
+
+
 type Reference = {
   current: string
   _type: "slug"
 }
 
 type Product = {
-  _id : Id
+  _id: Id
   name: string
   slug: Slug
   price: number
-  quantity : number
+  quantity: number
   Thumbnail: Image
-  Image : Image
+  Image: Image
   description: ProductDescription
-  category : Reference
+  category: Reference
 }
 
 type ProductSingle = Omit<Product, "Thumbnail" | "category">
@@ -46,7 +49,7 @@ type ProductDescription = {
 
 
 type SessionStorageCartItem = {
-  slug : string
-  _id : string
-  qty : number
+  slug: string
+  _id: string
+  qty: number
 }

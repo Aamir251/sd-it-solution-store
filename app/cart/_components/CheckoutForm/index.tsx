@@ -1,8 +1,8 @@
 "use client"
+import { load } from "@cashfreepayments/cashfree-js";
 
 import UserInfoForm from "./UserInfoForm"
 import OrderDetailsForm from "./OrderDetailsForm"
-import { OrderDoc } from "@/sanity/lib/types"
 import { CartItem } from "@/types/cart"
 import { useState } from "react"
 import { useCartContext } from "@/ContextProviders/CartContext"
@@ -33,10 +33,16 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
   const [showOverlay, setShowOverlay] = useState<boolean>(false)
 
   const [disableSubmitBtn, setDisableSubmitBtn] = useState(false)
+  let cashFree: any;
 
-
+  const initializeSDK = async function () {
+    cashFree = await load({
+      mode: process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT
+    });
+  }
   const handleOrder = (items: CartItem[]) => async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setShowOverlay(true)
     try {
       const formData = new FormData(e.currentTarget)
       const email = formData.get("email") as string
@@ -48,7 +54,8 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
         name,
         email,
         contact,
-        amount
+        amount,
+        cartItems: items
       }
 
       const createOrderResp = await fetch("/api/create-order", {
@@ -58,18 +65,19 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
 
       const createOrderData = await createOrderResp.json()
 
-      console.log(createOrderData);
+      const paymentSessionId = createOrderData.payment_session_id
+
+      saveOrderItemToSession({ name, email, contact })
+
+      await initializeSDK();
+
+      let checkoutOptions = {
+        paymentSessionId: paymentSessionId,
+        redirectTarget: "_self",
+      };
+      cashFree.checkout(checkoutOptions);
 
 
-      if (createOrderData.status) {
-        // order creation successful
-
-        router.push(createOrderData.data.payment_url)
-      } else {
-        // order creation failed
-      }
-
-      setShowOverlay(true)
 
     } catch (error) {
       console.log(error);

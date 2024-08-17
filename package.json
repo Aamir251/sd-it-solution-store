@@ -11,8 +11,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cashfreepayments/cashfree-js": "^1.0.5",
     "@sanity/image-url": "^1.0.2",
     "@sanity/vision": "^3.46.1",
+    "cashfree-pg": "^4.2.3",
     "crypto": "^1.0.1",
     "next": "14.2.4",
     "next-sanity": "^9.3.10",
