@@ -3,7 +3,6 @@
 import UserInfoForm from "./UserInfoForm"
 import OrderDetailsForm from "./OrderDetailsForm"
 import { OrderDoc } from "@/sanity/lib/types"
-import { createOrderId } from "@/utils/razorpay"
 import { CartItem } from "@/types/cart"
 import { useState } from "react"
 import { useCartContext } from "@/ContextProviders/CartContext"
@@ -33,8 +32,10 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
 
   const [showOverlay, setShowOverlay] = useState<boolean>(false)
 
+  const [disableSubmitBtn, setDisableSubmitBtn] = useState(false)
 
-  const processPayment = (items: CartItem[]) => async (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleOrder = (items: CartItem[]) => async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const formData = new FormData(e.currentTarget)
@@ -42,82 +43,32 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
       const name = formData.get("name") as string
       const contact = formData.get("contact") as unknown as number
 
-      const currency = 'INR'
       const amount = getTotal(items) - ((discount / 100) * getTotal(items))
-      const notes = {
+      const body = {
         name,
         email,
-        contact
+        contact,
+        amount
       }
-      const orderId: string = await createOrderId(amount, notes);
 
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZOR_KEY_ID,
-        amount: parseFloat(amount.toString()) * 100,
-        currency: currency,
-        name: 'name',
-        description: 'description',
-        order_id: orderId,
-        handler: async function (response: any) {
-          const data = {
-            orderCreationId: orderId,
-            razorpayPaymentId: response.razorpay_payment_id,
-            razorpayOrderId: response.razorpay_order_id,
-            razorpaySignature: response.razorpay_signature,
-          };
+      const createOrderResp = await fetch("/api/create-order", {
+        method: "POST",
+        body: JSON.stringify(body)
+      })
 
-          const result = await fetch('/api/verify', {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json' },
-          });
-          const res = await result.json();
-          if (res.isOk) {
-            /**
-             * Handle Successful Payment
-            */
-            const orderObj: OrderDoc = {
-              orderId,
-              customerName: name,
-              email,
-              _type: "orders",
-              contact: Number(contact),
-              items: items.map(({ _id, name, qty, price }) => ({
-                productId: _id,
-                productName: name,
-                quantity: qty,
-                price
-              }))
-            }
-            saveOrderItemToSession(orderObj)
-            router.push(`/processing-order?orderId=${orderId}`)
-          }
-          else {
-            alert(res.message);
-          }
-        },
-        prefill: {
-          name,
-          email,
-          contact
-        },
-        theme: {
-          color: '#3399cc',
-        },
-        modal: {
-          ondismiss: () => {
-            setShowOverlay(false)
+      const createOrderData = await createOrderResp.json()
 
-          }
-        }
-      };
-      const win = window as any
-      const paymentObject = new win.Razorpay(options);
+      console.log(createOrderData);
 
-      paymentObject.on('payment.failed', function (response: any) {
-        alert(response.error.description);
-      });
-      paymentObject.open();
+
+      if (createOrderData.status) {
+        // order creation successful
+
+        router.push(createOrderData.data.payment_url)
+      } else {
+        // order creation failed
+      }
+
       setShowOverlay(true)
 
     } catch (error) {
@@ -125,18 +76,18 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
     }
   };
 
-  const handleSubmit = processPayment(items)
+  const handleSubmit = handleOrder(items)
 
   return (
     <>
-      {showOverlay && <FullPageLoader />}
-      <div className="fixed top-0 left-0 flex-center h-screen w-screen bg-black/60">
+      {showOverlay && <FullPageLoader text="Processing Order. Please Do not Refresh or Close." />}
+      <div className="fixed top-0 left-0 flex-center h-screen w-screen z-20 bg-black/60">
         <form onSubmit={handleSubmit} className="w-11/12 max-w-3xl border bg-white py-10 px-5">
           <div className={`${stepCount === 1 ? "block" : "hidden"}`}>
             <UserInfoForm setEmail={setEmail} hideForm={hideForm} showStepTwo={showStepTwo} />
           </div>
 
-          {stepCount === 2 && <OrderDetailsForm goBack={showStepOne} discount={discount} setDiscount={setDiscount} email={email} />}
+          {stepCount === 2 && <OrderDetailsForm disableSubmitBtn={disableSubmitBtn} goBack={showStepOne} discount={discount} setDiscount={setDiscount} email={email} />}
 
         </form>
       </div>

@@ -1,11 +1,11 @@
 
 type FullPageLoaderProps = {
-  text? : string
+  text?: string
 }
 
-const FullPageLoader = ({ text } : FullPageLoaderProps) => {
+const FullPageLoader = ({ text }: FullPageLoaderProps) => {
   return (
-    <section className="w-screen h-screen fixed left-0 top-0 flex-center flex-col z-10 bg-white gap-5">
+    <section className="w-screen h-screen fixed left-0 top-0 flex-center flex-col z-30 bg-white gap-5">
       <div
         className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-black align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] dark:text-white"
         role="status">

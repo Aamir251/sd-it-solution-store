@@ -13,16 +13,16 @@ import { Dispatch, SetStateAction, useState } from "react"
 
 
 type UserInfoFormProps = {
-  hideForm : () => void
-  showStepTwo : () => void
-  setEmail : Dispatch<SetStateAction<string>>
+  hideForm: () => void
+  showStepTwo: () => void
+  setEmail: Dispatch<SetStateAction<string>>
 }
 
 
-const UserInfoForm = ({ hideForm, showStepTwo, setEmail } : UserInfoFormProps) => {
+const UserInfoForm = ({ hideForm, showStepTwo, setEmail }: UserInfoFormProps) => {
 
   return (
-    
+
     <div className="relative py-3 sm:max-w-xl sm:mx-auto">
       <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
         <div className="max-w-md mx-auto">
@@ -50,7 +50,7 @@ const UserInfoForm = ({ hideForm, showStepTwo, setEmail } : UserInfoFormProps) =
               <button onClick={hideForm} type="button" className="flex w-max justify-center items-center w-full text-gray-900 px-4 py-3 rounded-md focus:outline-none">
                 <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg> Cancel
               </button>
-              <button onClick={showStepTwo} type="button" className="btn-black">Proceed</button>
+              <button onClick={showStepTwo} type="button" className={`btn-black`}>Proceed</button>
             </div>
           </div>
         </div>

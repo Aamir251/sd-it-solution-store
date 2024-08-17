@@ -12,9 +12,10 @@ type OrderDetailsFormProps = {
   discount: number
   setDiscount: Dispatch<SetStateAction<number>>
   goBack: () => void
+  disableSubmitBtn: boolean
 }
 
-const OrderDetailsForm = ({ email, discount, setDiscount, goBack }: OrderDetailsFormProps) => {
+const OrderDetailsForm = ({ email, discount, setDiscount, goBack, disableSubmitBtn }: OrderDetailsFormProps) => {
   const [isLoading, setIsLoading] = useState(true)
 
   const { items } = useCartContext()
@@ -75,7 +76,7 @@ const OrderDetailsForm = ({ email, discount, setDiscount, goBack }: OrderDetails
       }
       <div className="flex gap-x-12 justify-end pt-10 items-center">
         <button type="button" onClick={goBack} className="btn-bottom-border">Go Back</button>
-        <button type="submit" className="btn-black">Pay Now</button>
+        <button type="submit" disabled={disableSubmitBtn} aria-disabled={disableSubmitBtn} className={`btn-black ${disableSubmitBtn && "cursor-wait"}`}>Pay Now</button>
       </div>
     </>
   )
