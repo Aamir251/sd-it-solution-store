@@ -30,7 +30,8 @@ const handler = async (request: Request) => {
         customer_name: name,
         customer_email: email,
         customer_mobile: contact,
-        redirect_url: 'https://9ba7-45-126-162-183.ngrok-free.app/payment',
+        // redirect_url: 'https://9ba7-45-126-162-183.ngrok-free.app/payment',
+        redirect_url: 'https://sditsolutionstore.com/payment',
       }),
     })
 
