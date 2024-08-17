@@ -1,4 +1,12 @@
 import Container from "@/components/globals/Container"
+import { Metadata } from "next"
+
+
+export const metadata: Metadata = {
+  title: 'Terms and Conditions | SD IT Solution',
+  description: 'Read the Terms and Conditions for SD IT Solution Store to understand our policies on purchases, deliveries, returns, and more. Stay informed about your rights and responsibilities.',
+}
+
 
 const TermsAndConditionsPage = () => {
   return (

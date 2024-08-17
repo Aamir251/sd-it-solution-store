@@ -4,7 +4,13 @@ import CallIcon from "@/assets/icons/call.svg"
 import LocationIcon from "@/assets/icons/map.svg"
 import Link from "next/link"
 import Image from "next/image"
+import { Metadata } from "next"
 
+
+export const metadata: Metadata = {
+  title: 'Contact Us | SD IT Solution Store',
+  description: 'Get in touch with SD IT Solution Store. Contact us for any inquiries, support, or feedback regarding your IT software purchases, including Microsoft Windows and Office.',
+}
 
 const ContactUsPage = () => {
   return (

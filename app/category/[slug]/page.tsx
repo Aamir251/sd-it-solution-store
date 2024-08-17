@@ -1,3 +1,4 @@
+import type { Metadata, ResolvingMetadata } from 'next'
 
 export const revalidate = 3600 // revalidate at most every hour
 
@@ -20,6 +21,24 @@ export async function generateStaticParams() {
     slug : category.slug.current
   }))
 
+}
+
+export async function generateMetadata(
+  { params }: ProductsByCategoryPageProps,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  // const id = params.id
+ 
+  // fetch data
+  // const product = await fetch(`https://.../${id}`).then((res) => res.json())
+ 
+  // optionally access and extend (rather than replace) parent metadata
+  // const previousImages = (await parent).openGraph?.images || []
+ 
+  return {
+    title: `${params.slug.split("-").join(" ")}`,
+  }
 }
 
 const ProductsByCategoryPage = async ({ params } : ProductsByCategoryPageProps) => {

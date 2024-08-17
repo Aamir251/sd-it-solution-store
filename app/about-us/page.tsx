@@ -1,4 +1,12 @@
 import Container from "@/components/globals/Container"
+import { Metadata } from "next"
+
+
+export const metadata: Metadata = {
+  title: 'About Us | SD IT Solution Store',
+  description: 'Learn more about SD IT Solution Store. Discover our mission, values, and the team dedicated to providing you with the best IT software solutions like Microsoft Windows and Office.',
+}
+
 
 const AboutUsPage = () => {
   return (

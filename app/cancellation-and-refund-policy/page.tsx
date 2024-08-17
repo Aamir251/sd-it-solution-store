@@ -1,4 +1,12 @@
 import Container from "@/components/globals/Container"
+import { Metadata } from "next"
+
+
+export const metadata: Metadata = {
+  title: 'Cancellation and Refund Policy | SD IT Solution Store',
+  description: 'Review the Cancellation and Refund Policy of SD IT Solution Store. Understand our guidelines for canceling orders and processing refunds to ensure a smooth shopping experience.',
+}
+
 
 const CancellationAndRefundPolicy = () => {
   return (

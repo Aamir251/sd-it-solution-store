@@ -1,4 +1,13 @@
 import Container from "@/components/globals/Container"
+import { Metadata } from "next"
+
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | SD IT Solution Store',
+  description: "Learn about SD IT Solution Store's Privacy Policy. Understand how we collect, use, and protect your personal information to ensure a secure shopping experience."
+}
+
+
 
 const PrivacyPolicyPage = () => {
   return (
