@@ -25,6 +25,8 @@ const handler = async (req: Request) => {
   console.log("Cart_items ", cart_items);
   const order_id = generateClientTxnId();
 
+  console.log({ order_id });
+
   const request = {
     order_amount: 10,
     order_currency: "INR",
@@ -46,6 +48,7 @@ const handler = async (req: Request) => {
 
   try {
     const response = await fetch("https://api.cashfree.com/pg/orders", {
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
