@@ -18,6 +18,7 @@ const OrderSuccessPage = async ({ searchParams: { order_id } }: OrderSuccessPage
   }
 
   const orderStatus = await getOrderStatus(order_id)
+  console.log({ orderStatus })
 
 
   if (Array.isArray(orderStatus)) {
