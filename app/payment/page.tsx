@@ -25,7 +25,7 @@ const OrderSuccessPage = async ({ searchParams: { order_id } }: OrderSuccessPage
 
     const orderData = orderStatus[0]
 
-    if (orderData.payment_status === "SUCCESS" && orderData.payment_message === "Transaction Successful") {
+    if (orderData.payment_status === "SUCCESS") {
       return (
         <OrderSuccessful
           payment_amount={orderData.payment_amount!}
