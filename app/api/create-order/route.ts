@@ -1,17 +1,9 @@
 import { CartItem } from "@/types/cart";
 import { generateClientTxnId } from "@/utils/payment";
-import { Cashfree } from "cashfree-pg";
 
 const handler = async (req: Request) => {
   const clientId = process.env.NEXT_PUBLIC_CASHFREE_APPID as string;
   const appSecret = process.env.NEXT_PUBLIC_CASHFREE_SECRET as string;
-
-  Cashfree.XClientId = clientId;
-  Cashfree.XClientSecret = appSecret;
-  Cashfree.XEnvironment =
-    process.env.NODE_ENV === "development"
-      ? Cashfree.Environment.SANDBOX
-      : Cashfree.Environment.PRODUCTION;
 
   const body = await req.json();
 
@@ -54,6 +46,13 @@ const handler = async (req: Request) => {
 
   try {
     const response = await fetch("https://api.cashfree.com/pg/orders", {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "x-api-version": "2023-08-01",
+        "x-client-id": clientId,
+        "x-client-secret": appSecret,
+      },
       body: JSON.stringify(request),
     });
 
