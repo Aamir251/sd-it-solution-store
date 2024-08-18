@@ -49,7 +49,7 @@ export const getOrderStatus = async (order_id: string) => {
 
   Cashfree.XClientId = clientId;
   Cashfree.XClientSecret = appSecret;
-  Cashfree.XEnvironment = Cashfree.Environment.SANDBOX;
+  Cashfree.XEnvironment = process.env.NODE_ENV === "development" ? Cashfree.Environment.SANDBOX : Cashfree.Environment.PRODUCTION;
 
 
   try {
