@@ -35,6 +35,9 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
   const [disableSubmitBtn, setDisableSubmitBtn] = useState(false)
   let cashFree: any;
 
+  console.log({ items });
+
+
   const initializeSDK = async function () {
     cashFree = await load({
       mode: process.env.NEXT_PUBLIC_CASHFREE_ENVIRONMENT
