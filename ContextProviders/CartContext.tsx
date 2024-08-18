@@ -4,6 +4,7 @@ import { useSessionStorage } from "@/hooks/useSessionStorage";
 import { CartContextType, CartItem } from "@/types/cart";
 import { checkIfItemAlreadyPresentInCart } from "@/utils/cart";
 import { PropsWithChildren, createContext, useContext, useState } from "react";
+import toast from "react-hot-toast";
 import { Id } from "sanity";
 
 
@@ -29,6 +30,7 @@ const CartContextProvider = ({ children }: PropsWithChildren) => {
     }
 
     setData([...data, item])
+    toast.success("Item added to cart!")
   }
 
   const deleteItem = (id: Id) => {

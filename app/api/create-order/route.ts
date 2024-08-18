@@ -1,3 +1,5 @@
+import { createOrderItem } from "@/sanity/lib/queries";
+import { OrderDoc } from "@/sanity/lib/types";
 import { CartItem } from "@/types/cart";
 import { generateClientTxnId } from "@/utils/payment";
 import { Cashfree } from "cashfree-pg";
@@ -22,16 +24,23 @@ const handler = async (req: Request) => {
     cartItems: CartItem[];
   };
 
-  const cart_items = cartItems.map((item) => ({
-    item_id: item._id,
-    item_name: item.name,
-    item_image_url: item.imageUrl,
-    item_original_unit_price: item.price,
-    item_quantity: item.qty,
+  const orderItems = cartItems.map((item) => ({
+    productId: item._id,
+    productName: item.name,
+    quantity: item.qty,
+    price: item.price,
   }));
 
-  console.log("Cart_items ", cart_items);
   const order_id = generateClientTxnId();
+
+  const orderDoc: OrderDoc = {
+    _type: "orders",
+    orderId: order_id,
+    customerName: name,
+    email,
+    contact,
+    items: orderItems,
+  };
 
   const request = {
     order_amount: 10,
@@ -54,7 +63,7 @@ const handler = async (req: Request) => {
     const response = await Cashfree.PGCreateOrder("2023-08-01", request);
     const data = response.data;
 
-    console.log({ data });
+    const resp = await createOrderItem(orderDoc);
 
     return Response.json(data, { status: 201 });
   } catch (error: any) {

@@ -5,6 +5,7 @@ import { Cairo, Poppins } from 'next/font/google'
 import CartContextProvider from "@/ContextProviders/CartContext";
 import Navbar from "@/components/globals/Navbar";
 import Footer from "@/components/globals/Footer";
+import { Toaster } from "react-hot-toast";
 
 const cairo = Cairo({
   variable: '--font-family-cairo',
@@ -13,7 +14,7 @@ const cairo = Cairo({
 })
 
 const poppins = Poppins({
-  variable : '--font-family-poppins',
+  variable: '--font-family-poppins',
   subsets: ['latin'],
   weight: ['500', '700', '300', '400', '600'],
 })
@@ -33,6 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <CartContextProvider>
         <body className={`${cairo.variable} ${poppins.variable}`}>
+          <Toaster />
           <Navbar />
           {children}
           <Footer />

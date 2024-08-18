@@ -22,6 +22,7 @@
     "razorpay": "^2.9.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
     "sanity": "^3.46.1",
     "styled-components": "^6.1.11"
   },
