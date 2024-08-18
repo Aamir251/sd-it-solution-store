@@ -66,7 +66,11 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
         body: JSON.stringify(body)
       })
 
+      console.log({ createOrderResp });
+
       const createOrderData = await createOrderResp.json()
+
+      console.log({ createOrderData })
 
       const paymentSessionId = createOrderData.payment_session_id
 

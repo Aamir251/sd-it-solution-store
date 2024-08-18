@@ -56,7 +56,11 @@ const handler = async (req: Request) => {
     const response = await fetch("https://api.cashfree.com/pg/orders", {
       body: JSON.stringify(request),
     });
+
+    console.log({ response });
     const data = await response.json();
+
+    console.log({ data });
 
     return Response.json(data, { status: 201 });
   } catch (error: any) {
