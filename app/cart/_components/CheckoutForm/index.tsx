@@ -58,7 +58,7 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
         email,
         contact,
         amount,
-        cartItems: items
+        cartItems: items,
       }
 
       const createOrderResp = await fetch("/api/create-order", {

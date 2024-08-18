@@ -1,9 +1,17 @@
 import { CartItem } from "@/types/cart";
 import { generateClientTxnId } from "@/utils/payment";
+import { Cashfree } from "cashfree-pg";
 
 const handler = async (req: Request) => {
   const clientId = process.env.NEXT_PUBLIC_CASHFREE_APPID as string;
   const appSecret = process.env.NEXT_PUBLIC_CASHFREE_SECRET as string;
+
+  Cashfree.XClientId = clientId;
+  Cashfree.XClientSecret = appSecret;
+  Cashfree.XEnvironment =
+    process.env.NODE_ENV === "development"
+      ? Cashfree.Environment.SANDBOX
+      : Cashfree.Environment.PRODUCTION;
 
   const body = await req.json();
 
@@ -25,8 +33,6 @@ const handler = async (req: Request) => {
   console.log("Cart_items ", cart_items);
   const order_id = generateClientTxnId();
 
-  console.log({ order_id });
-
   const request = {
     order_amount: 10,
     order_currency: "INR",
@@ -41,26 +47,12 @@ const handler = async (req: Request) => {
       // return_url: 'https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}'
       return_url: `${process.env.NEXT_PUBLIC_CASHFREE_REDIRECT}?order_id=${order_id}`,
     },
-    cart_details: {
-      cart_items,
-    },
+    order_note: `${cartItems}`,
   };
 
   try {
-    const response = await fetch("https://api.cashfree.com/pg/orders", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "x-api-version": "2023-08-01",
-        "x-client-id": clientId,
-        "x-client-secret": appSecret,
-      },
-      body: JSON.stringify(request),
-    });
-
-    console.log({ response });
-    const data = await response.json();
+    const response = await Cashfree.PGCreateOrder("2023-08-01", request);
+    const data = response.data;
 
     console.log({ data });
 
