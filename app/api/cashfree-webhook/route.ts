@@ -4,7 +4,7 @@ const handler = async (request: Request) => {
 
     const data = await request.json();
 
-    console.log({ WEBHOOK: data });
+    console.log("webhook order ", data.order);
 
     return Response.json({ message: "hello" }, { status: 201 });
   } catch (error: any) {

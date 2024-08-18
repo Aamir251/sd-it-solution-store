@@ -40,6 +40,7 @@ const handler = async (req: Request) => {
     email,
     contact,
     items: orderItems,
+    isPaid: false,
   };
 
   const request = {
@@ -56,7 +57,7 @@ const handler = async (req: Request) => {
       // return_url: 'https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}'
       return_url: `${process.env.NEXT_PUBLIC_CASHFREE_REDIRECT}?order_id=${order_id}`,
     },
-    order_note: `${cartItems}`,
+    order_note: `${JSON.stringify(cartItems)}`,
   };
 
   try {
