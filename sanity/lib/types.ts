@@ -26,5 +26,5 @@ export type OrderDoc = {
   email: string;
   contact: number | string;
   items: OrderItem[];
-  isPaid: false;
+  isPaid: "PENDING" | "SUCCESS";
 };

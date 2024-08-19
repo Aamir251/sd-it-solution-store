@@ -42,7 +42,7 @@ const handler = async (req: Request) => {
     email,
     contact,
     items: orderItems,
-    isPaid: false,
+    isPaid: "PENDING",
   };
 
   const request = {
