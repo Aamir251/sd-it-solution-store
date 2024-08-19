@@ -82,9 +82,15 @@ export const changeProductQuantity = async (
 
 export const changePaymentStatusOfOrder = async (
   orderId: string,
-  paymentStatus: boolean
+  paymentStatus: "SUCCESS" | "PENDING"
 ) => {
-  return client.patch(orderId).set({ isPaid: paymentStatus }).commit({
+  const query = groq`*[_type == "orders" && orderId=="${orderId}"]`;
+
+  const document = await client.fetch(query).then((data) => data[0]);
+
+  if (!document) return;
+
+  return client.patch(document._id).set({ isPaid: paymentStatus }).commit({
     token: process.env.NEXT_PUBLIC_CREATE_ORDER_TOKEN,
   });
 };

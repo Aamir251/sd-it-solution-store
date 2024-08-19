@@ -1,12 +1,20 @@
+import { changePaymentStatusOfOrder } from "@/sanity/lib/queries";
+
 const handler = async (request: Request) => {
   try {
-    console.log({ request });
+    const webhookData = await request.json();
+    console.log("Webhook Data ", webhookData);
 
-    const data = await request.json();
+    const data = webhookData.data;
 
-    console.log("webhook order ", data.order);
+    const paymentStatus = data.payment.payment_status;
 
-    return Response.json({ message: "hello" }, { status: 201 });
+    if (paymentStatus === "SUCCESS") {
+      const orderId = data.order.order_id;
+
+      await changePaymentStatusOfOrder(orderId, "SUCCESS");
+      return Response.json({ message: "Order Successful" }, { status: 201 });
+    } else throw new Error("Payment not successful! ");
   } catch (error: any) {
     console.log({ error });
 

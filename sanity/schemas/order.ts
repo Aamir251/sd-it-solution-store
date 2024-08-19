@@ -32,8 +32,8 @@ export const orderType = defineType({
     defineField({
       name: "isPaid",
       title: "Payment Status",
-      type: "boolean",
-      initialValue: false,
+      type: "string",
+      initialValue: "PENDING",
     }),
     defineField({
       name: "items", // the ordered Items
