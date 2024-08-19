@@ -31,6 +31,8 @@ const handler = async (req: Request) => {
     price: item.price,
   }));
 
+  const orderNote = cartItems.map((item) => ` ${item.name} | ${item.qty},`);
+
   const order_id = generateClientTxnId();
 
   const orderDoc: OrderDoc = {
@@ -57,7 +59,7 @@ const handler = async (req: Request) => {
       // return_url: 'https://www.cashfree.com/devstudio/preview/pg/web/checkout?order_id={order_id}'
       return_url: `${process.env.NEXT_PUBLIC_CASHFREE_REDIRECT}?order_id=${order_id}`,
     },
-    order_note: `${JSON.stringify(cartItems)}`,
+    order_note: `${orderNote}`,
   };
 
   try {
