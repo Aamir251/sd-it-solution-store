@@ -17,10 +17,11 @@ const handler = async (req: Request) => {
 
   const body = await req.json();
 
-  const { name, email, contact, cartItems } = body as {
+  const { name, email, contact, cartItems, amount } = body as {
     name: string;
     email: string;
     contact: string;
+    amount : number;
     cartItems: CartItem[];
   };
 
@@ -46,7 +47,7 @@ const handler = async (req: Request) => {
   };
 
   const request = {
-    order_amount: 10,
+    order_amount: amount,
     order_currency: "INR",
     order_id,
     customer_details: {
