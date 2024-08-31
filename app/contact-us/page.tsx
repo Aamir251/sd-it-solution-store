@@ -6,6 +6,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { Metadata } from "next"
 
+export const revalidate = 1800 // revalidate the data at most 30 minutes
+
 
 export const metadata: Metadata = {
   title: 'Contact Us | SD IT Solution Store',

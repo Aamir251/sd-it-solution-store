@@ -1,6 +1,6 @@
 import type { Metadata, ResolvingMetadata } from 'next'
 
-export const revalidate = 3600 // revalidate at most every hour
+export const revalidate = 1800 // revalidate the data at most 30 minutes
 
 import ProductCard from "@/components/ProductCards/ProductCard"
 // fetches the products of the particular category and renders it

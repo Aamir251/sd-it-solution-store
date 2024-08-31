@@ -3,7 +3,7 @@ import HeroHeader from "./_components/HeroHeader";
 import ProductsSection from "@/components/ProductsSection";
 import { Metadata } from "next";
 
-export const revalidate = 3600 // revalidate the data at most every hour
+export const revalidate = 1800 // revalidate the data at most 30 minutes
 
 
 const fetchHomePageData = async () => {
