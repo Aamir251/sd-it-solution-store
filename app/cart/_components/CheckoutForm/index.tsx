@@ -35,8 +35,6 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
   const [disableSubmitBtn, setDisableSubmitBtn] = useState(false)
   let cashFree: any;
 
-  console.log({ items });
-
 
   const initializeSDK = async function () {
     cashFree = await load({
@@ -66,11 +64,9 @@ const CheckoutForm = ({ hideForm }: CheckoutFormProps) => {
         body: JSON.stringify(body)
       })
 
-      console.log({ createOrderResp });
 
       const createOrderData = await createOrderResp.json()
 
-      console.log({ createOrderData })
 
       const paymentSessionId = createOrderData.payment_session_id
 

@@ -30,8 +30,8 @@ const ContactUsPage = () => {
             <Link className="hover:text-primary-orange" href={"mailto:sditsolutionstore@gmail.com"}>
               sditsolutionstore@gmail.com
             </Link>
-            <Link className="hover:text-primary-orange" href={"mailto:sditsolutionstore@gmail.com"}>
-              sditsolutionstore@gmail.com
+            <Link className="hover:text-primary-orange" href={"mailto:subashdas634@gmail.com"}>
+              subashdas634@gmail.com
             </Link>
           </div>
         </div>
