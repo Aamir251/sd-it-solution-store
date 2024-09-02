@@ -54,8 +54,9 @@ const ContactUsPage = () => {
             <Image src={LocationIcon} alt="mail us" width={45} height={45} />
           </div>
           <div className="flex flex-col space-y-3 text-sm">
-            <p>Bow Bazar, SF Road</p>
-            <p>Jaigaon, 736182</p>
+            <p>Bhagat Singh Nagar, Jaigaon</p>
+            <p>Dist - Alipurduar</p>
+            <p>Pincode - 736182</p>
             <p>West Bengal, India</p>
           </div>
         </div> 
