@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import NavbarLogo from "@/assets/logos/sd-it-logo.svg"
+import NavbarLogo from "@/assets/logos/sd-it-logo.png"
 import { Dispatch, SetStateAction } from "react"
 import CloseNavIcon from "@/assets/icons/nav-close.svg"
 
@@ -16,7 +16,7 @@ const NavLogo = ({ setShowDropdown, showDropdown }: NavLogoProps) => {
     <div className="flex justify-between w-full md:w-max">
       <Link href={"/"}>
         <figure className="w-max">
-          <Image style={{ objectFit: "contain" }} src={NavbarLogo} alt="sd it solutions logo" width={40} height={40} />
+          <Image style={{ objectFit: "contain" }} src={NavbarLogo} alt="sd it solutions logo" width={90} height={90} />
 
         </figure>
       </Link>

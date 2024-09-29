@@ -85,7 +85,7 @@ button:disabled {
 }
 
 .navlink {
-  @apply py-2 md:py-0 text-sm text-black-two border-0 border-b border-transparent  hover:border-primary-orange hover:text-primary-orange
+  @apply py-2 md:py-0 md:text-sm text-black-two border-0 border-b border-transparent  hover:border-primary-orange hover:text-primary-orange
 }
 
 .btn-small {
